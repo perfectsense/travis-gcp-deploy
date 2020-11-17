@@ -105,10 +105,13 @@ travis_start "gcp_rm"
 gsutil ls gs://$DEPLOY_BUCKET/$target | \
 while read -r line
 do
-    if [[ $line != CommandException* ]]
-    then
-        echo "Deleting existing artifact gs://$DEPLOY_BUCKET/$filename."
-        gs rm gs://$DEPLOY_BUCKET/$filename
+    if [[ $line != CommandException* ]]; then
+      filename=`echo "$line" | awk -F'[[:space:]][[:space:]]' '{print $3}'`
+      if [[ $filename != "" ]]
+      then
+          echo "Deleting existing artifact gs://$DEPLOY_BUCKET/$filename."
+          gs rm gs://$DEPLOY_BUCKET/$filename
+      fi
     fi
 done
 travis_end
