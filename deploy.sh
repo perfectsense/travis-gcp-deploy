@@ -41,6 +41,7 @@ fi
 
 # BEGIN Travis fold/timer support
 
+openssl des3 -d -in ./etc/travis/travis-gcp-deploy.json.des3 -out ./etc/travis/travis-gcp-deploy.json -pass pass:$GCP_CREDENTIALS
 gcloud auth activate-service-account --key-file=etc/travis/travis-gcp-deploy.json
 
 activity=""
