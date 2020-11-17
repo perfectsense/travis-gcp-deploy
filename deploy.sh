@@ -132,7 +132,7 @@ then
 
     for suffix in deploy pull-request
     do
-        gsutil ls gs://$DEPLOY_BUCKET/$cleanup_prefix$suffix/ --output=text | \
+        gsutil ls -l gs://$DEPLOY_BUCKET/$cleanup_prefix$suffix/ | \
         while read -r line
         do
             # "a8a397744d8d7a09ae750017a59326b5"      production-builds/builds/deploy/v2020.11.02/2666/project-site-2020.10.19-29-gf722cc+2666.war       2020-11-02T16:31:07.000Z        72058545        STANDARD
@@ -148,7 +148,7 @@ then
                 if [[ $filename != "" ]]
                 then
                     echo "gs://$DEPLOY_BUCKET/$filename is older than $PURGE_OLDER_THAN_DAYS days ($last_modified). Deleting."
-                    gsputils rm "gs://$DEPLOY_BUCKET/$filename"
+                    gsputil rm "gs://$DEPLOY_BUCKET/$filename"
                 fi
             fi
         done
