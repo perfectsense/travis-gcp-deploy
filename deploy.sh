@@ -135,6 +135,7 @@ then
         gsutil ls -l gs://$DEPLOY_BUCKET/$cleanup_prefix$suffix/ | \
         while read -r line
         do
+            echo "line $line"
             # "a8a397744d8d7a09ae750017a59326b5"      production-builds/builds/deploy/v2020.11.02/2666/project-site-2020.10.19-29-gf722cc+2666.war       2020-11-02T16:31:07.000Z        72058545        STANDARD
             last_modified=`echo "$line" | awk -F'\t' '{print $4}'`
             if [[ -z $last_modified ]]
