@@ -119,6 +119,7 @@ travis_end
 travis_start "gcp_cp"
 for file in $files
 do
+    echo "Uploading ${file} to gs://${DEPLOY_BUCKET}/${target}"
     gsutil cp $file gs://$DEPLOY_BUCKET/$target
 done
 travis_end
