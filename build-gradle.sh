@@ -35,7 +35,7 @@ else
 
     version=""
     if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
-        version="PR$TRAVIS_PULL_REQUEST"
+        version="PR$TRAVIS_PULL_REQUEST+$TRAVIS_BUILD_NUMBER"
 
     elif [[ "$TRAVIS_TAG" =~ ^v[0-9]+\. ]]; then
         version=${TRAVIS_TAG/v/}
